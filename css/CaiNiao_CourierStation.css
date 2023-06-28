@@ -1,0 +1,322 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+div {
+  display: block;
+}/*所有盒子块状布局*/
+.page-wrap {
+  min-height: 100%;
+}
+.footer, .header, .nav {
+  width: 960px;
+  margin: 0 auto;
+}
+.header {
+  line-height: 20px;
+  margin: 0 60px;
+}
+.page-wrap:after {
+  content: "";
+  display: block;
+  height: 86px;
+}/*主体页面盒子清除塌陷*/
+.header:after, .header:before {
+  content: " ";
+  display: table;
+}/*头部页面盒子清除塌陷*/
+.header:after {
+  clear: both;
+}/*头部页面盒子清除塌陷*/
+.header:after, .header:before {
+  content: " ";
+  display: table;
+}/*头部页面盒子清除塌陷*/
+.header {
+  height: 60px;
+  width: 100%;
+}
+.header .logo {
+  position: relative;
+  width: 174px;
+  height: 36px;
+  margin: 12px auto 0;
+}/*logo定位*/
+.header .header-title {
+  position: relative;
+  float: left;
+  font-family: "微软雅黑", sans-serif;
+  font-size: 12px;
+  line-height: 12px;
+  color: #727272;
+  margin: 29px auto 0 10px;
+  left: 350px;
+}/*标题文字定位*/
+
+
+
+
+
+.nav-container {
+  height: 53px;
+  width: 100%;
+  background-color: #1c81e5;
+  display: inline-block;
+  text-align: center;
+}/*导航栏设置宽高和背景色，行内块元素显示，文本居中*/
+.nav {
+  list-style: none;
+}/*导航栏设置怪异盒子并居中显示*/
+.nav>li>a.phone-icon {
+  text-indent: 16px;
+  background-image: url("../img/phone.png");
+  background-repeat: no-repeat;
+  background-position: 16px center;
+}/*手机图标图片定位*/
+ul li{
+  float: left;
+}/*导航栏列表浮动*/
+.clearfix:after, .clearfix:before, .nav:after, .nav:before {
+  content: " ";
+  display: table;
+}/*导航栏盒子清除塌陷*/
+.nav>a, .nav>a:focus, .nav>a:hover, .nav>li>a:focus, .nav>li>a:hover {
+  font-weight: 700;
+  background-color: #196ec2;
+}/*导航栏设置鼠标悬浮时字体加粗并出现其他颜色*/
+.nav li a {
+  position: relative;
+  display: block;
+  padding: 18px 16px;
+  line-height: 1;
+  color: #fff;
+  text-decoration: none;
+}
+/*a标签定位*/
+a {
+  color: #0961d9;
+  text-decoration: none;
+}
+
+
+
+
+
+.search-container {
+  width: 560px;
+  position: relative;
+  margin: 70px auto 0;
+}
+/*搜索栏内容定位并居中*/
+.search-box {
+  position: relative;
+}
+.search-container .search-box .address-input, .search-container .search-box .keywords-input, .search-container .search-box .search-input {
+  float: left;
+  font-size: 14px;
+  padding: 13px 0 13px 10px;
+  width: 458px;
+  height: 18px;
+  line-height: 18px;
+  border-top: 1px solid #b2b2b2;
+  border-left: 1px solid #d9d9d9;
+  border-bottom: 1px solid #d9d9d9;
+  border-right: none;
+  outline: 0;
+}/*搜索栏内容自定义设置宽高和边框*/
+.search-container .search-box .search-btn {
+  float: left;
+  width: 90px;
+  height: 46px;
+  background: url(../img/cainiao_btn.png) -200px 0 no-repeat;
+  background-size: 290px 46px;
+  cursor: pointer;
+}/*搜索按钮利用图片定位并设置鼠标悬浮时出现小手状态*/
+p {
+  display: block;
+}
+.example {
+  margin-top: 10px;
+  color: #aaa;
+  font-size: 12px;
+  line-height: 30px;
+}
+
+
+
+
+
+
+.title {
+  border-bottom: 1px solid #e6e6e6;
+  line-height: 36px;
+  font-size: 16px;
+  margin-left: 300px;
+}/*快递内容的标题框设置行高内边距并添加底部下划线颜色*/
+h3 {
+  display: block;
+  left: 250px;
+}/*快递内容标题定位*/
+.express-company-list:after, .express-company-list:before {
+  content: " ";
+  display: table;
+}/*快递内容盒子清除塌陷*/
+.express-company-list:after {
+  clear: both;
+}/*快递内容盒子清除塌陷*/
+.express-company-list:after, .express-company-list:before {
+  content: " ";
+  display: table;
+}/*快递内容盒子清除塌陷*/
+.express-company-list {
+  padding-top: 20px;
+}/*快递内容盒子上内边距*/
+.title span {
+  display: inline-block;
+  color: #1c81e5;
+  margin-bottom: -1px;
+  border-bottom: 1px solid #1c81e5;
+  padding-left: 2px;
+  padding-right: 20px;
+}/*快递内容的标题文字设置内外边距并添加底部下划线颜色*/
+.column {
+  float: left;
+  position: relative;
+  left: 300px;
+}/*快递内容盒子浮动并定位*/
+.express-company-list dl dt {
+  float: left;
+  width: 20px;
+  height: 26px;
+  line-height: 26px;
+  margin-top: 3px;
+  text-align: center;
+  font-size: 16px;
+  font-family: Arial, serif;
+  color: white;
+  background-color: #74baff;
+}/*快递内容主体排序ABC的浮动和设置样式*/
+.express-company-list:after, .express-company-list:before {
+  content: " ";
+  display: table;
+}/*快递列表内容清除塌陷*/
+.express-company-list dl:after, .express-company-list dl:before {
+  content: " ";
+  display: table;
+}/*快递列表内容盒子清除塌陷*/
+.express-company-list dl dd:after, .express-company-list dl dd:before {
+  content: " ";
+  display: table;
+}/*快递列表内容盒子清除塌陷*/
+.express-company-list dl dd:after {
+  clear: both;
+}/*快递列表内容盒子清除塌陷*/
+.express-company-list dl:after {
+  clear: both;
+}/*快递列表内容盒子清除塌陷*/
+.express-company-list:after {
+  clear: both;
+}/*快递列表内容盒子清除塌陷*/
+.express-company-list dl {
+  width: 100%;
+  display: block;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0;
+  margin-inline-end: 0;
+}/*快递列表设置盒子边距*/
+.express-company-list dl dd {
+  display: inline-block;
+  margin: 0 auto;
+  float: left;
+  width: 274px;
+}/*快递列表内容设置浮动和外边距*/
+.express-company-list dl dd:hover {
+  background-color: #E8F4FF;
+}/*快递列表内容块：当鼠标悬浮时添加背景色*/
+.express-company-list dl dd a {
+  width: 80px;
+  float: left;
+  line-height: 32px;
+  color: #666;
+  overflow: hidden;
+  text-align: center;
+  margin: 0 5px;
+  word-break: break-all;/*强制换行*/
+  white-space: nowrap;/*处理元素内的空白强制在同一行内显示所有文本，直到文本结束或者遭遇br对象*/
+  text-overflow: ellipsis;/*当对象内文本溢出时显示省略标记（...）*/
+  font-size: 12px;
+}/*快递列表内容a标签修饰*/
+.express-company-list dl dd b {
+  font-weight: normal;
+  float: left;
+  line-height: 32px;
+  color: #ddd;
+  width: 1px;
+}/*快递列表内容b标签分隔符修饰*/
+.express-company-list dl dd a:hover {
+  color: #0961d9;
+  text-decoration: underline;
+  font-weight: bold;
+}/*快递列表内容a标签：当鼠标悬浮时显示蓝色下划线*/
+
+
+
+
+
+
+
+
+
+.footer {
+  padding: 8px 0;
+}
+p {
+  display: block;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0;
+  margin-inline-end: 0;
+}
+.footer .footer-hd p {
+  padding-left: 100px;
+  font-size: 10px;
+  margin-bottom: 8px;
+  line-height: 22px;
+}/*页面底部内容设置字体大小行高底部外边距*/
+.footer .footer-hd p:after, .footer .footer-hd p:before {
+  content: " ";
+  display: table;
+}/*页面底部内容盒子清除塌陷*/
+.footer .footer-hd p:after {
+  clear: both;
+}/*页面底部内容盒子清除塌陷*/
+.footer-container {
+  border-top: 1px solid #d2ebf8;
+  background-color: #fafdff;
+}
+.footer .footer-hd a {
+  float: left;
+  white-space: nowrap;
+  color: #6c6c6c;
+  text-decoration: none;
+}/*页面底部上半部分内容a标签修饰*/
+.footer .footer-hd b {
+  float: left;
+  color: #ddd;
+}/*页面底部上半部分内容b标签修饰*/
+.footer-bd .copyright {
+  float: left;
+  text-align: center;
+  color: #6c6c6c;
+  font-weight: 400;
+  font-style: normal;
+  padding-left: 100px;
+  font-size: 10px;
+}/*版权内容浮动并设置样式*/
+.footer .footer-bd a {
+  float: left;
+  white-space: nowrap;
+  color: #6c6c6c;
+  text-decoration: none;
+}/*页面底部下半部分内容a标签修饰*/

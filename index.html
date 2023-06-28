@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<h1>你好JS</h1>
+
+<script>
+  //变量
+  //var有变量提升的效果
+  // var num = 100;
+  // var str = "你好啊！"
+  // var boolean = true;
+  // var f = undefined;
+  // var re1 = typeof num;
+  // var re2 = typeof str;
+  // var re3 = typeof boolean;
+  // var re4 = typeof f;
+  // console.log(re1,re2,re3,re4);
+  // str = 114514;
+  // console.log(str);
+
+  //算数运算符会触发隐式转换
+  // var a = 1;
+  // var b = '1';
+  // console.log(a - b);
+  // console.log(a + b);
+
+  // //幂运算
+  // var num = 4;
+  // var res = num ** 4;
+  // console.log(res);
+
+  // var a = 1;
+  // var b = '1';
+  // console.log(a == b); //true 双等号表示值是否相等，不判断数据类型
+  // console.log(a === b); //false 三等号比较类型和值是否相等 同理!== 表示类型和值不相等
+
+  // var f = prompt();//控制台弹出输入窗口
+  // if (f >= 60 && f <= 100) {
+  //   console.log("及格！")
+  // } else {
+  //   console.log("不及格！");
+  // }
+  // var f = prompt()
+  // if (!f || f > 100) {
+  //   alert("请输入正确格式的分数！")//浏览器弹出
+  // } else {
+  //   if (f >= 60) {
+  //     console.log("及格！")
+  //   } else {
+  //     console.log("不及格！");
+  //   }
+  // }
+
+  // const username = prompt("请输入账号");
+  // const password = prompt("请输入密码");
+  // if (!username && !password) alert("请输入账号和密码！")
+  // else if (!username && password) alert("请输入账号！")
+  // else if (username && !password) alert("请输入密码！")
+  // else alert("登录")
+  //
+  // console.log(username);
+  // console.log(password);
+
+  let n1 = prompt("First number");
+  let n2 = prompt("Second number");
+
+  let f = prompt("Please input your type of arithmetic");
+
+  switch (f) {
+    case "+":
+      console.log(n1 + n2);
+        break;
+    case "-":
+      console.log(n1 - n2);
+      break;
+    case "*":
+      console.log(n1 * n2);
+      break;
+    case "/":
+      if (n2 === "0") {
+        console.log("除数不能为零");
+      } else {
+        console.log(n1 / n2);
+      }
+      break;
+    default:
+      console.log("非法运算符");
+  }
+</script>
+
+</body>
+</html>
