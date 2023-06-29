@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>作业1:新年祝福</title>
+</head>
+<body>
+<script>
+  let username = prompt("请输入您的名字：");
+  fun(username);
+  function fun(username) {
+    if (!username) {
+      throw ("请输入您的名字(中文汉字)")
+    } else {
+      let message = username + "~新年快乐，万事如意，身体健康，笑口常开！";
+      document.write(message);
+    }
+  }
+</script>
+
+</body>
+</html>
