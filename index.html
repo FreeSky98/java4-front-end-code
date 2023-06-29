@@ -6,7 +6,7 @@
 </head>
 <body>
 <h1>你好JS</h1>
-
+<button onclick="fn()">click</button>
 <script>
   //变量
   //var有变量提升的效果
@@ -65,31 +65,71 @@
   // console.log(username);
   // console.log(password);
 
-  let n1 = prompt("First number");
-  let n2 = prompt("Second number");
+  // let n1 = prompt("First number");
+  // let n2 = prompt("Second number");
+  //
+  // let f = prompt("Please input your type of arithmetic");
+  //
+  // switch (f) {
+  //   case "+":
+  //     console.log(n1 + n2);
+  //       break;
+  //   case "-":
+  //     console.log(n1 - n2);
+  //     break;
+  //   case "*":
+  //     console.log(n1 * n2);
+  //     break;
+  //   case "/":
+  //     if (n2 === "0") {
+  //       console.log("除数不能为零");
+  //     } else {
+  //       console.log(n1 / n2);
+  //     }
+  //     break;
+  //   default:
+  //     console.log("非法运算符");
+  // }
 
-  let f = prompt("Please input your type of arithmetic");
+  // let str = "12344";
+  // let num = 100;
+  // let n = null;
+  // let f = undefined;
+  // let res = isNaN(f);//判断是否为非数字 函数
+  // console.log(res);
 
-  switch (f) {
-    case "+":
-      console.log(n1 + n2);
-        break;
-    case "-":
-      console.log(n1 - n2);
-      break;
-    case "*":
-      console.log(n1 * n2);
-      break;
-    case "/":
-      if (n2 === "0") {
-        console.log("除数不能为零");
-      } else {
-        console.log(n1 / n2);
-      }
-      break;
-    default:
-      console.log("非法运算符");
+  // let num = 1.6;
+  // let result = Math.round(num);//四舍五入 函数
+  // let result2 = Math.floor(num);//向下取整
+  // let result3 = Math.ceil(num);//向上取整
+  // let result4 = Math.abs(num);//取绝对值
+  // let result5 = Math.max(2,3,4,5);//求最大值
+  // let result6 = Math.min(2,3,4,5);//求最小值
+  // let result7 = Math.floor(Math.random()*10);//0-10之间的随机数
+  // console.log(result);
+  // console.log(result2);
+  // console.log(result3);
+  // console.log(result4);
+  // console.log(result5);
+  // console.log(result6);
+  // console.log(result7);
+
+  function fn(n = "形式参数") {
+    console.log("接收参数：",n)
+    alert("函数执行");
   }
+
+  function fun(a,b) {
+    if (typeof a === "number" && typeof b === "number") {
+      let result = a ** b;
+      console.log(result);
+      return result
+    }
+    else throw "参数必须都是数字类型"
+  }
+
+  let r = fun(2,3)
+  console.log("结果为：" + r)
 </script>
 
 </body>
