@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>カレンダー作成</title>
+</head>
+<style>
+  * {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  ul {
+    width: 1000px;
+    height: 60px;
+    margin: 0 auto;
+    border: 1px solid red;
+    align-items: center;
+    text-align: center;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+  }
+
+  ol {
+    width: 1000px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    align-items: center;
+  }
+
+  ol > li {
+    text-align: center;
+    height: 60px;
+    line-height: 60px;
+  }
+
+  #box {
+    height: 360px;
+    width: 1000px;
+    margin: 0 auto;
+    overflow: hidden;
+    overflow-y: scroll;
+    border: 1px solid red;
+  }
+</style>
+<body>
+<ul>
+  <li>日</li>
+  <li>月</li>
+  <li>火</li>
+  <li>水</li>
+  <li>木</li>
+  <li>金</li>
+  <li>土</li>
+</ul>
+<div id="box">
+  <ol id="list"></ol>
+</div>
+<button onclick="fa()">先月</button>
+<button onclick="fn()">今日</button>
+<button onclick="fb()">来月</button>
+
+<script>
+  var list = document.getElementById('list')
+  var y = 2022
+  var m = 7
+  var w = new Date(y + "-1-1").getDay()
+  for (var k = 1; k <= w; k++) {
+    var li = document.createElement("li")
+    list.appendChild(li)
+  }
+
+  for (var i = 1; i <= 12; i++) {
+    var day = new Date(y, i, 0).getDate()
+    for (var j = 1; j <= day; j++) {
+      var li = document.createElement("li")
+      if (j === 1) {
+        li.id = "月" + i
+      }
+      li.innerText = y + "年" + i + "月" + j + "日"
+      list.appendChild(li)
+    }
+  }
+
+  function fn() {
+    var t = document.getElementById("月" + m)
+// console.log()
+    list.style.transform = "translateY(" + (-t.offsetTop + 63) + "px)"
+  }
+
+  function fa() {
+    m--
+    if (m < 1) {
+      m = 12
+    }
+    var t = document.getElementById("月" + m)
+    list.style.transform = "translateY(" + (-t.offsetTop) + "px)"
+  }
+
+  function fb() {
+    m++
+    if (m > 12) {
+      m = 1
+    }
+    var t = document.getElementById("月" + m)
+
+    list.style.transform = "translateY(" + (-t.offsetTop) + "px)"
+  }
+</script>
+</body>
+</html>
