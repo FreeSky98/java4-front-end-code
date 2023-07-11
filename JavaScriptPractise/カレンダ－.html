@@ -67,17 +67,14 @@
       let li = document.createElement("li")
       li.innerText = lastMonthDays - week + w + 1
       list.appendChild(li)
-    } else {
-      let li = document.createElement("li")
-      list.appendChild(li)
     }
   }
 
   let day = new Date(year, month, 0).getDate();
   for (let i = 1; i <= day; i++) {
     let li = document.createElement("li");
-    li.innerText = i
-    list.appendChild(li)
+    li.innerText = i;
+    list.appendChild(li);
   }
 </script>
 </body>
