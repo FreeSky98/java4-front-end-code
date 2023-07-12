@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+
+<script>
+
+  function fa(callback) {
+    setTimeout(function () {
+      console.log(1)
+      callback()
+    }, 1000)
+  }
+
+  function fb(callback) {
+    setTimeout(function () {
+      console.log(3)
+      callback()
+    }, 200)
+  }
+
+  // 回调地狱
+  fa(function () {
+    console.log(2)
+    fb(function () {
+      console.log(4)
+    })
+  })
+
+
+  //
+  // console.log(4)
+
+
+  // function fn(callback) {
+  //     setTimeout(function () {
+  //         console.log(1)
+  //         callback()
+  //     },2000)
+  // }
+  //
+  // function fb() {
+  //     console.log(2)
+  // }
+  //
+  // fn(fb)
+
+
+  // 异步
+  //
+  // 单线程
+
+
+  // 同步 一步一步走
+  // 异步 耽误时间
+
+  // console.log(1)
+  // setTimeout(function () {
+  //     console.log(2)
+  // },0)
+  // console.log(3)
+
+
+  // 回调函数
+  // function fb() {
+  //     console.log("fb函数")
+  // }
+  //
+  // function fn(callback) {
+  //
+  //     console.log("fn执行")
+  //     callback()
+  // }
+  //
+  // fn(fb)
+
+  var arr1 = [{
+    name:"wang",
+    age:21
+  } , {
+    name:"zhang",
+    age:20
+  } , {
+    name:"li",
+    age:22
+  }]
+
+  var arr = ["html","css","js"]
+
+  var nameList = arr1.map(function (item) {
+    return item.name
+  })
+  console.log(nameList);
+
+  var res = arr.filter(function (item,index) {
+    return item.length > 2
+  }) //过滤返回符合条件的结果
+  console.log(res);
+
+  var res1 = arr1.find(function (item) {
+    return item.age > 20
+  })
+  console.log(res1);
+
+  var pass = arr.every(function (item,index) {
+    return item.length > 2
+  })
+  console.log(pass);
+</script>
+</body>
+</html>
