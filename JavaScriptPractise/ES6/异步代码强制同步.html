@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+
+<script>
+  const generatorController = GeneratorFn();
+
+  function* GeneratorFn() {
+    fa()
+    yield; //切片
+    fb()
+    yield;
+    fc()
+    yield;
+    fd()
+  }
+
+  function fa() {
+    setTimeout(() => {
+      console.log(1);
+      generatorController.next()
+    }, 1000)
+  }
+
+  function fb() {
+    setTimeout(() => {
+      console.log(2);
+      generatorController.next()
+    }, 100)
+  }
+
+  function fc() {
+    setTimeout(() => {
+      console.log(3);
+      generatorController.next()
+    }, 500)
+  }
+
+  function fd() {
+    console.log(4);
+  }
+
+  generatorController.next()
+</script>
+</body>
+</html>

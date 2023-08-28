@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    *{
+      padding: 0;
+      margin: 0;
+    }
+    #btn{
+      width: 200px;
+      height: 200px;
+      background-color: #fff;
+      border: 1px solid red;
+      margin: 0 auto;
+      position: relative;
+      overflow: hidden;
+    }
+    .bobo{
+      position: absolute;
+      border-radius: 50%;
+      background-color: lightskyblue;
+      transform: scale(0);
+      animation: bobo 0.3s linear;
+    }
+
+    @keyframes bobo {
+      100%{
+        transform: scale(1.5);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div id="btn">按钮</div>
+<div id="bb">按钮</div>
+<h1 id="h1">标题</h1>
+
+<script>
+  HTMLElement.prototype.bobo = function () {
+    this.style.position = "relative"
+    this.style.overflow = "hidden"
+    this.addEventListener("click",function (e) {
+      const rect = this.getBoundingClientRect()
+      const x = e.clientX - rect.left
+      const y = e.clientY - rect.top
+      const bobo = document.createElement("div")
+      const boboWidth = Math.max(this.offsetWidth,this.offsetHeight)
+      bobo.style.width = boboWidth+"px"
+      bobo.style.height = boboWidth+"px"
+      bobo.classList.add("bobo")
+      bobo.style.left = (x - (boboWidth/2))+"px"
+      bobo.style.top = (y - (boboWidth/2))+"px"
+      this.appendChild(bobo)
+      setTimeout(() => {
+        this.removeChild(bobo)
+      },500)
+    })
+  }
+
+  const btn = document.getElementById("btn")
+  btn.bobo()
+  const bb = document.getElementById("bb")
+  bb.bobo()
+  const h1 = document.getElementById("h1")
+  h1.bobo()
+
+</script>
+</body>
+</html>

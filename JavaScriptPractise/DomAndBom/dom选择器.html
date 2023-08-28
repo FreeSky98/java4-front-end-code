@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<ul id="list">
+  <li>1</li>
+  <li class="a">2</li>
+  <li class="a">3</li>
+  <li>4</li>
+  <li>5</li>
+</ul>
+<img id="img" src="../../img/JD.png">
+<script>
+  //选择器匹配的第一个元素
+  // var list = document.querySelector("#list");
+
+  //选择选择器匹配的所有元素
+  var list = document.querySelectorAll("#li>.a")
+  list.forEach(function (item) {
+    console.log(item);
+  })
+
+  var img = document.querySelector("img")
+  setTimeout(
+    function () {
+    // img.setAttribute("src","../img/btn.bmp")//自定义属性
+    //   img.setAttribute("data-zz","tired")
+
+      // img.removeAttribute("src")//删除属性
+  }
+  ,1000)
+</script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<button id="btn">获取验证码</button>
+
+<script>
+  var btn = document.querySelector("#btn")
+
+  btn.onclick = function () {
+    var s = 10
+    btn.innerText = s+"s"
+    btn.disabled = true//禁用标签
+
+    var tid = setInterval(function () {
+      s--
+      console.log(s);
+      btn.innerText = s + "s"
+
+      if (s <= 0) {
+        clearInterval(tid)
+        btn.disabled = false//禁用标签
+        btn.innerText = "获取验证码"
+      }
+
+    },1000)
+  }
+
+  // localStorage.setItem("name","ikun")//设置本地存储
+  // localStorage.getItem("name")//读取存储
+  // localStorage.removeItem("name")//删除存储
+
+  var bool = true
+  var arr = [3,4,5]
+  var obj = {
+    name:"王",
+    age:25
+  }
+  localStorage.setItem("newObj",JSON.stringify(obj))//对象转字符串
+  console.log(JSON.parse(localStorage.newObj));//字符串重新转对象
+
+
+</script>
+</body>
+</html>

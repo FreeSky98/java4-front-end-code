@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="./axios.js"></script>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            list-style: none;
+        }
+        .bottom{
+            width: 800px;
+            height: 160px;
+            margin: 0 auto;
+            background-color: red;
+            position: relative;
+        }
+        .bottom>textarea{
+            width: 100%;
+            box-sizing: border-box;
+            font-size: 16px;
+            resize: none;
+        }
+        #btn{
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+        }
+        #list{
+            height: calc(100vh - 160px);
+            width: 800px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+        }
+        #list::-webkit-scrollbar{
+            display: none;
+        }
+        #list>li{
+            padding: 10px;
+            max-width: 80%;
+        }
+        #list>.user{
+            align-self: self-end;
+        }
+        #list>.assistant{
+            align-self: self-start;
+        }
+        .user>.msg,.assistant>.msg{
+            padding: 8px;
+            background-color:#409EFF;
+            font-size: 20px;
+            color: white;
+            border-radius: 8px 8px 0;
+        }
+        .user>.name{
+            text-align: right;
+        }
+        .assistant>.msg{
+            background-color:#67C23A;
+            border-radius: 8px 8px 8px 0;
+        }
+        #loading{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<ul id="list">
+    <li class="assistant">
+        <p class="msg">有什么可以帮助你</p>
+        <p class="name">assistant</p>
+    </li>
+    <li id="loading" class="assistant">
+        <p class="msg">正在思考中...</p>
+        <p class="name">assistant</p>
+    </li>
+</ul>
+<div class="bottom">
+    <textarea id="text" placeholder="请输入消息" rows="8"></textarea>
+    <button id="btn">发送</button>
+</div>
+<script>
+    var request = axios.create({
+        baseURL:"http://192.168.100.215:9527"
+    })
+    var text = document.querySelector("#text")
+    var btn = document.querySelector("#btn")
+    var list = document.querySelector("#list")
+    var loading = document.querySelector("#loading")
+
+    var messages = []
+    btn.onclick = function () {
+        if (!(text.value.trim())){
+            alert("请输入消息")
+            return
+        }
+        btn.disabled = true
+        messages.push({
+            role:"user",
+            content:text.value
+        })
+        messageList()
+        loading.style.display = "block"
+        request.post("/chat/message",{
+            messages:messages
+        }).then(function (res) {
+            messages.push(res.data)
+            loading.style.display = "none"
+            messageList()
+            console.log(res.data)
+            btn.disabled = false
+        })
+    }
+    function messageList() {
+        var li = document.createElement("li")
+        var p1 = document.createElement("p")
+        var p2 = document.createElement("p")
+        var message = messages[messages.length-1]
+        li.classList.add(message.role)
+        p1.classList.add("msg")
+        p2.innerText = message.role
+        p2.classList.add("name")
+        li.append(p1,p2)
+        list.insertBefore(li,loading)
+        if (message.role==="user"){
+            p1.innerText = message.content
+            list.scrollTop = list.scrollHeight
+        }else {
+            var index = 0
+            var tid=setInterval(function () {
+                p1.innerText+=(message.content.slice(index,index+5))
+                index+=5
+                if (index > message.content.length){
+                    clearInterval(tid)
+                }
+                list.scrollTop = list.scrollHeight
+            },60)
+        }
+    }
+    // /chat/message
+    // post
+    // body传参数
+    //
+    //  messages:[{role:"user",content:"你认识张锦哲吗？"}]
+
+</script>
+</body>
+</html>

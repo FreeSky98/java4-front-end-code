@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<style>
+
+  *{
+    padding: 0;
+    margin: 0;
+  }
+  #list{
+    width: 400px;
+    height: 500px;
+    border: 1px solid red;
+    margin: 100px auto;
+    overflow-y: scroll;
+  }
+  #list>img{
+    display: block;
+    width: 100px;
+    height: 100px;
+    margin: 0 auto;
+  }
+
+</style>
+<body>
+<div id="list"></div>
+
+<script>
+
+  // 图片懒加载
+  var list = document.querySelector("#list")
+
+  for (var i = 0; i < 100; i++) {
+    var img = document.createElement("img")
+    img.classList.add("lazy")
+    img.setAttribute("data-src","https://qzonestyle.gtimg.cn/qzone/em/e"+(102+i)+".gif")
+    //img.src = "https://qzonestyle.gtimg.cn/qzone/em/e"+(102+i)+".gif"
+    list.appendChild(img)
+  }
+
+  list.onscroll = function () {
+    var top = list.scrollTop
+    var images = document.querySelectorAll(".lazy")
+    if (!images.length) {
+      img.onscroll = null;
+    }
+    for (var i = 0; i < images.length; i++) {
+      var offsetTop = images[i].offsetTop - 100
+      if ((list.clientHeight + top) > offsetTop) {
+        images[i].src = images[i].getAttribute("data-src")
+        images[i].classList.remove("lazy")
+      }
+    }
+  }
+
+</script>
+</body>
+</html>

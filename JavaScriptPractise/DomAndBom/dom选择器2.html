@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div>
+  <p>我是段落标签</p>
+</div>
+</body>
+
+<script>
+  var d = document.querySelector("div")//CSS选择器
+  var p = document.querySelector("div>p")
+
+  var rect = d.getBoundingClientRect()//获取当前视口元素坐标点
+  console.log(rect);
+
+  // d.offsetHeight//获取元素高
+  // d.offsetWidth//获取元素宽
+  //
+  // d.scrollHeight//获取滚动内容高
+  // d.scrollWidth//获取滚动内容宽
+  //
+  // d.clientHeight//获取元素可视高
+  // d.clientWidth//获取元素可视宽
+</script>
+</html>

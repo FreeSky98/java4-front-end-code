@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+  }
+  #box {
+    width: 500px;
+    height: 470px;
+    margin: 100px auto;
+    border: 1px solid skyblue;
+    position: relative;
+  }
+  #box>img {
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+  }
+  #box>.show {
+    opacity: 1;
+  }
+</style>
+<body>
+<div id="box">
+  <img class="show" src="https://img20.360buyimg.com/seckillcms/s280x280_jfs/t20260424/125060/31/36262/63152/64476ac5F73bbf3bc/963e6a4b0d9739d7.jpg.webp" alt="">
+  <img src="https://m.360buyimg.com/seckillcms/s250x250_jfs/t20260715/139339/31/34479/54702/64b3673bFaff61ba0/079415ad2748b065.gif" alt="">
+  <img src="https://img13.360buyimg.com/seckillcms/s280x280_jfs/t1/76051/40/24934/38994/6485b33bF67f9f2ec/6b4771ebe3b04fe6.jpg.webp" alt="">
+</div>
+<button id="btn2">上一张</button>
+<button id="btn1">下一张</button>
+
+<script>
+  var btn1 = document.querySelector("#btn1")
+  var btn2 = document.querySelector("#btn2")
+  var box = document.querySelector("#box")
+
+  var current = box.firstElementChild //当前图片所显示的
+  btn1.onclick = function () {
+    current.classList.remove("show")
+    var nextEl = current.nextElementSibling
+    if (nextEl) {
+      nextEl.classList.add("show")
+      current = nextEl
+    } else {
+      current = box.firstElementChild
+      box.firstElementChild.classList.add("show")
+    }
+  }
+
+  btn2.onclick = function () {
+    current.classList.remove("show")
+    var previousEl = current.previousElementSibling
+    if (previousEl) {
+      previousEl.classList.add("show")
+      current = previousEl
+    } else {
+      current = box.lastElementChild
+      box.lastElementChild.classList.add("show")
+    }
+  }
+</script>
+</body>
+</html>

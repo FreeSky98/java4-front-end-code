@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>let&const</title>
+</head>
+<body>
+
+
+
+<script>
+  // let a = 5;//块级变量 局部作用
+  // for (let i = 0; i < 5; i++) {//同步 let声明变量会自己形成一个块级
+  //   setTimeout(function () {//异步
+  //     console.log(i);
+  //   },0)
+  // }
+  /**
+   * {i = 0 setTimeout 0}
+   * {i = 1 setTimeout 1}
+   * {i = 2 setTimeout 2}
+   * {i = 3 setTimeout 3}
+   * {i = 4 setTimeout 4}
+   */
+
+  // const str = "我是只读变量"//const变量声明后只读，不允许改变
+  //
+  // let name = "张三";
+  // const obj = {
+  //   name:"qq",
+  //   age:22
+  // }
+  // const {name:newName,age,abc=12} = obj;
+  //
+  // console.log(name);
+  // console.log(newName);
+  // console.log(age);
+  // console.log(abc);
+
+  const arr = ["ada","black","cristy"]//解构模式
+  const [,,c] = arr;
+  console.log(c);
+
+  let str = "你好世界"
+  let res = `${str.length > 0?'1':'2'}再见世界`
+  console.log(res);
+
+  const obj = { //新特性：变量名可以是表达式
+    [1+1]:"wqq",
+    age:25,
+    fn(){}
+  }
+  console.log(obj);
+
+  let q = {
+    q:1
+  }
+  let w = {
+    w:2
+  }
+  let e = {
+    e:3
+  }
+  Object.assign(q,w,e)
+  console.log(q);
+
+
+
+
+  // function f() {
+  //   return 1;
+  // }
+  //
+  // f()
+  // f``
+
+</script>
+</body>
+</html>

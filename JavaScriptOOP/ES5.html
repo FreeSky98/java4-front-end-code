@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+
+
+<script>
+  // const string = new String("help!");
+  // console.log(string);
+
+  function Person(name,age,job,address) {
+    this.name = name;
+    this.age = age;
+    this.job = job;
+    this.address = address;
+    this.intro = function () {
+      console.log(this);
+    }
+    this.type = Math.random();
+  }
+
+  const wqq = new Person("王倩倩",18,"学生","江苏省南京市");
+  const adam = new Person("亚当",25,"英语外教","美国德克萨斯州");
+  console.log(wqq,adam);
+
+  if (wqq instanceof Person) {
+    console.log("王倩倩是一个人类")
+  } else {
+    console.log("王倩倩不是一个人类")
+  }
+
+  if (adam instanceof Person) {
+    console.log("亚当是一个人类")
+  } else {
+    console.log("亚当不是一个人类")
+  }
+
+</script>
+</body>
+</html>

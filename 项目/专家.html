@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>专家团队</title>
+    <script src="./js/query.min.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
+    <script src="./js/swiper-bundle.min.js"></script>
+    <link rel="stylesheet" href="./css/swiper-bundle.min.css">
+    <link rel="stylesheet" href="./css/base.css">
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <script src="./js/zhuanjia.js"></script>
+    <style>
+        img{
+            width: 100%;
+        }
+
+        .team_area li{
+            display: inline;
+            font-size: 16px;
+            padding: 5px;
+            margin: 0 10px;
+            border-radius: 5px;
+            width: 56px;
+            height: 21px;
+        }
+
+        .team_area .li1{
+            color: #2EAB23;
+        }
+
+        .team_area{
+            width: 1320px;
+            height: 123px;
+            padding-left: 208px;
+            margin: 20px;
+        }
+    </style>
+    <link rel="stylesheet" href="css/footNav.css">
+
+</head>
+<body>
+<script src="js/navbar.js"></script>
+
+<!--背景图-->
+<img src="http://w3.dfqy.com/Uploads/Picture/2018-05-04/5aec3384aa8c0.jpg">
+<!--背景图结束-->
+
+<!--团队区域-->
+<div class="team_area">
+    <div class="team">
+
+        <ul>
+            <li class="li1">团队</li>
+            <li>全部</li>
+            <li>导数团队</li>
+            <li>美国专家</li>
+            <li>中国香港专家</li>
+            <li>国内专家</li>
+            <li>国内训练师</li>
+        </ul>
+    </div>
+    <div class="area">
+        <ul>
+            <li class="li1">区域</li>
+            <li>全部</li>
+            <li>宁波<li>
+            <li>苏州</li>
+            <li>合肥</li>
+            <li>青岛</li>
+            <li>成都</li>
+            <li>郑州</li>
+            <li>福州</li>
+            <li>南昌</li>
+            <li>西安</li>
+            <li>无锡</li>
+            <li>总部</li>
+            <li>北京</li>
+            <li>上海<li>
+            <li>武汉</li>
+            <li>长沙</li>
+            <li>南京</li>
+            <li>重庆</li>
+            <li>广州</li>
+            <li>深圳</li>
+            <li>东莞</li>
+            <li>佛山</li>
+            <li>杭州</li>
+        </ul>
+    </div>
+</div>
+
+<script>
+
+    $(function () {   //准备就绪
+        zhuanjia.forEach(function (item) {
+            var con = $(`<div class='container'>
+                            <div class="alert alert-info" role="alert">
+                                ${item.tname}
+                             </div>
+                          </div>`)   //创建div标签
+            var row = $("<div class='row'></div>")
+
+
+            item.professor.forEach(function (it) {
+                var col = $(`
+                    <div class="col-md-4 col-sm-6">
+                        <div class="thumbnail">
+                            <img style="width: 100%" src="../../7.3/img/樊哥.jpg" alt="" />
+                            <div class="caption">
+                                <h5>${it.pname}</h5>
+                                <p>${it.pos}</p>
+                                <p>${it.intro}</p>
+                            </div>
+                        </div>
+                    </div>
+                `)
+                row.append(col)
+            })
+            con.append(row)
+            $("body").append(con)
+
+        })
+    })
+
+    //团队区域
+    var lis = document.querySelectorAll(".team_area li")
+    lis.forEach(function (li) {
+        li.onclick = function (ev){
+            lis.forEach(function (li1){
+                li1.style.backgroundColor = null
+            })
+            ev.target.style.backgroundColor = "#2EAB23"
+        }
+    })
+
+
+</script>
+
+</body>
+</html>

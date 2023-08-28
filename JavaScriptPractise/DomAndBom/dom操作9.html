@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+  }
+  ul {
+    display: grid;
+    list-style: none;
+    width: 1200px;
+    height: 540px;
+    margin: 0 auto;
+    grid-template-columns: repeat(4,320px);
+  }
+  li {
+    background-image: url("https://cdn.aimeike.tv/theme/10033/thumbnail_seq.jpg?auth_key=1689857455-0-0-e76e72dec587ba3100262882721888dc");
+    height: 180px;
+    width: 320px;
+    background-size: 1280px 540px;
+    background-repeat: no-repeat;
+  }
+
+</style>
+<body>
+<ul id="list"></ul>
+<img style="display: block;margin: 0 auto;" width="1000" src="https://cdn.aimeike.tv/theme/10033/thumbnail_seq.jpg?auth_key=1689857455-0-0-e76e72dec587ba3100262882721888dc" alt="">
+
+<script>
+  var list = document.querySelector("#list")
+
+  var arr = []
+
+  for (var i = 0; i < 12; i++) {
+    var li = document.createElement("li")
+    var col = Math.floor(i % 4)
+    var row = Math.floor(i / 4)
+    li.style.backgroundPosition = (-col * 320) + "px " +(-row * 180) + "px "
+    list.appendChild(li)
+
+    arr.push(li)
+  }
+  arr.sort(function () {
+    return Math.random() - 0.5
+  })
+  arr.forEach(function (item) {
+    list.append(item)
+  })
+</script>
+</body>
+</html>

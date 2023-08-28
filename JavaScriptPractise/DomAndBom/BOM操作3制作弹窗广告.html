@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+  }
+
+  .ad {
+    width: 150px;
+    height: 150px;
+    position: fixed;
+    background-image: url("../../img/樊哥生气.jpg") ;
+    background-repeat: no-repeat;
+    background-size: auto;
+    background-position: right bottom;
+    bottom: 0;
+    right: -400px;
+    transition: right 0.5s ease-in-out;
+  }
+
+</style>
+<body>
+<div class="ad">
+  <button class="title">5s后不生气</button>
+  <button class="btn" onclick>不许生气</button>
+</div>
+
+<script>
+  var ad = document.querySelector(".ad")
+  var title = document.querySelector(".title")
+  var btn = document.querySelector(".btn")
+  setTimeout(function () {
+    ad.style.right = "0px"
+    var s = 5
+    title.innerText = s + "s后不生气"
+    var tid = setInterval(function () {
+      s--
+      title.innerText = s + "s后不生气"
+      if (s <= 0) {
+        title.onclick = function () {
+            ad.style.right = "-400px"
+        }
+        clearInterval(tid)
+      }
+    },1000) //需求：定时任务之后不会消失弹窗
+    title.onclick = function () {
+      if (s <= 0) {
+        ad.style.right = "-400px"
+      }
+    }//需求：定时任务之后需要点击才能关闭
+
+    // setTimeout(function () {
+    //   clearInterval(tid)
+    //   ad.style.right = "-400px"
+    // },s*1000) //时间一到自动关闭
+  },2000)
+
+  btn.onclick = function () {
+    ad.style.right = "-400px"
+  }
+</script>
+</body>
+</html>

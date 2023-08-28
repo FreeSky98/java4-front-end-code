@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<style>
+  .box {
+    width: 300px;
+    margin: 100px auto;
+  }
+  label {
+    display: block;
+  }
+</style>
+<body>
+<div class="box">
+  <label>
+    账号：<input id="username" placeholder="请输入账号" />
+  </label>
+  <label>
+    密码：<input id="password" placeholder="请输入密码" />
+  </label>
+  <label>
+    验证码：<input placeholder="请输入验证码" />
+    <div id="vcode">加载中</div>
+  </label>
+  <button>登录</button>
+</div>
+
+<script>
+  var vcode = document.querySelector("#vcode")
+  function getCode() {
+    var xhr = new XMLHttpRequest()
+    xhr.open("GET","https://myapi.hml-media.net/jeecg-boot/sys/getCheckCode?_t="+Math.random())
+    xhr.send()
+    xhr.onload = function () {
+      var res = JSON.parse(xhr.response)
+      console.log(res)
+      vcode.innerText = res.result.code
+    }
+  }
+  getCode()
+  function login() {
+    var username = document.querySelector("#username")
+    var password = document.querySelector("#password")
+
+    var xhr = new XMLHttpRequest()
+    xhr.open("POST","https://myapi.hml-media.net/jeecg-boot/sys/login/sms")
+    xhr.send({
+      code:password.value,
+      username:username.value
+    })
+    xhr.onload = function () {
+      console.log(xhr.response);
+    }
+  }
+</script>
+</body>
+</html>

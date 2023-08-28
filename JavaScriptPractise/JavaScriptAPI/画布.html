@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>画布canvas功能</title>
+</head>
+<style>
+  #myCanvas {
+    border: 10px solid skyblue;
+    display: block;
+    margin: 100px auto;
+  }
+</style>
+<body>
+<canvas id="myCanvas" width="500" height="500"></canvas>
+<button onclick="download()">立即下载</button>
+
+
+
+<script>
+  var myCanvas = document.getElementById("myCanvas")
+  var ctx = myCanvas.getContext("2d")//获取画布内的元素上下文
+
+  //线条
+  ctx.beginPath();
+  ctx.moveTo(50,50);//起点移动至X,Y
+  ctx.lineTo(150,150);//线条XY
+  ctx.lineTo(150,50);//线条XY
+  ctx.lineTo(50,50);//线条XY
+  ctx.stroke()//启动
+  ctx.closePath()
+
+  var grd = ctx.createLinearGradient(0,0,500,0)//创建渐变色对象
+  grd.addColorStop(0,"black")
+  grd.addColorStop(1,"pink")
+
+  ctx.strokeStyle = grd;
+  ctx.moveTo(50,50);//起点移动至X,Y
+  ctx.lineTo(50,150);//线条XY
+  ctx.lineTo(150,150);//线条XY
+  ctx.lineTo(50,50);//线条XY
+  ctx.stroke()//启动
+  ctx.closePath()
+
+  ctx.fillStyle = grd
+  ctx.fillRect(200,200,200,200)
+
+  function clearRect() {
+    ctx.clearRect(200,200,200,200)
+  } //清楚矩形范围内的画布
+  clearRect()
+
+  // 设置弧线的样式
+  ctx.strokeStyle = 'red'; // 线条颜色
+  ctx.lineWidth = 2; // 线条宽度
+
+  // 绘制弧线
+  ctx.beginPath();
+  ctx.arc(200, 200, 100, 0, Math.PI, false); // 圆心坐标 (200, 200)，半径 100，起始角度为 0，终止角度为 PI，逆时针方向绘制
+  ctx.stroke();
+
+  //填充文本
+  ctx.fillText("HelloWorld！",250,100)
+  ctx.font = "200px Arial"
+  ctx.textAlign = "center"
+
+  //贴图
+  var img = document.createElement("img")
+  img.src = "../img/btn.bmp"//加载是异步的
+  img.onload = function () {
+    ctx.drawImage(img,300,300)
+  }//图片加载成功后强制同步
+  img.width = 100
+  img.height = 100
+
+  function download() {
+    myCanvas.toBlob(function (blob) {
+      var url = URL.createObjectURL(blob)
+      var link = document.createElement("a")
+      link.href = url
+      link.download = "抽象网页画图作品"
+      link.click()
+      URL.revokeObjectURL(url)
+    })
+  }
+
+</script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>定时器</title>
+</head>
+<body>
+<button onclick="fb()">关闭定时</button>
+<script>
+  function fn() {
+    console.log(1)
+  }
+  var nid = setInterval(fn,1000)//隔？？毫秒执行 不会自己停下
+  var tid = setTimeout(fn,1000)//隔？？毫秒执行 只会执行一次
+
+  function fb() {
+    clearTimeout(tid)
+    clearInterval(nid)
+  }
+</script>
+</body>
+</html>

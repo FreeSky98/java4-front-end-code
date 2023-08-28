@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<style>
+  #update {
+    background-color: #00cdcd;
+  }
+</style>
+<body>
+<h3 id="nums">0</h3>
+<h1 id="city"></h1>
+<ul id="list"></ul>
+<p id="update"></p>
+<script>
+  var list = document.getElementById("list")
+  var nums = document.getElementById("nums")
+  var city = document.getElementById("city")
+  var update = document.getElementById("update")
+  var xhr = new XMLHttpRequest()
+  xhr.open("GET","https://v0.yiketianqi.com/free/week?unescape=1&appid=31456623&appsecret=0QETNFX9")
+  xhr.send()
+  xhr.onload = function () {
+    var res = JSON.parse(xhr.response)
+    nums.innerText = "今日调用"+res.nums+"次"
+    city.innerText = res.city
+    update.innerText = "更新时间"+res.update_time
+
+    res.data.forEach(function (item) {
+      var li = document.createElement("li")
+      var p = document.createElement("p")
+      var p1 = document.createElement("p")
+      var p2 = document.createElement("p")
+      var img = document.createElement("img")
+      p.innerText = item.date
+      p1.innerText = item.tem_night+"-"+item.tem_day
+      p2.innerText = item.win+"-"+item.win_speed
+      img.src = "../img/"+item.wea_img+".png"
+      li.append(p,p1,img,p2)
+      li.append(p,p1,p2)
+      list.appendChild(li)
+    })
+    console.log(res);
+  }
+</script>
+</body>
+</html>

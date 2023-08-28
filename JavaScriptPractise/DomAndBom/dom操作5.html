@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div style="height: 2000px"> </div>
+</body>
+
+<script>
+  document.onscroll = function () {
+    var top = document.documentElement.scrollTop
+    var scrollHeight = document.documentElement.scrollHeight
+    if (top + window.innerHeight >= scrollHeight - 10) {
+      console.log("到底了")
+    }
+  }
+</script>
+</html>

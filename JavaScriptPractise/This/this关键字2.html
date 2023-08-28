@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="d1">
+  <div id="d2"></div>
+</div>
+<script>
+  var d1 = document.getElementById("d1")
+  var d2 = document.getElementById("d2")
+
+  d1.onclick = function (e) {
+    console.log(this);//指向当前函数
+    console.log(e.target);//指向谁触发的事件
+  }
+  d2.onclick = function (e) {
+    console.log(this);//指向当前函数
+    console.log(e.target);//指向谁触发的事件
+  }
+
+</script>
+</body>
+</html>

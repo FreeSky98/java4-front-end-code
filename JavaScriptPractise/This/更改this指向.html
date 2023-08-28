@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+
+<script>
+  var obj = {
+    name:"ben",
+    age:30
+  }
+  function fn(a,b) {
+    console.log(this);
+    console.log(a, b);
+  }
+  var newFn = fn.bind(obj);//bind更改this指向并返回一个新函数
+  newFn(3,4);//新函数赋值
+  // fn.call(obj)//call()更改this指向 执行函数
+  // fn.call(obj,1,2)
+  //
+  // fn.apply(obj,[1,2])//apply()更改this指向 执行函数
+</script>
+</body>
+</html>

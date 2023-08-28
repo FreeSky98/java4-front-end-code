@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            list-style: none;
+        }
+        #list>li{
+            background-color: #fff;
+            border-bottom: 2px solid #999;
+        }
+        #list>li>h3,#list>li>ol{
+            line-height: 40px;
+            padding-left: 16px;
+        }
+        #title{
+            position: fixed;
+            width: 100%;
+            box-sizing: border-box;
+            left: 0;
+            top: 0;
+            line-height: 40px;
+            padding-left: 16px;
+            background-color: #fff;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            color: royalblue;
+        }
+        #list{
+            height: 100vh;
+            overflow: hidden;
+            overflow-y: scroll;
+        }
+        #az{
+            position: fixed;
+            top: 50px;
+            right: 10px;
+        }
+        #az>li{
+            font-size: 14px;
+            width: 22px;
+            height: 22px;
+            text-align: center;
+        }
+        #az>.azactive{
+            color: royalblue;
+        }
+        #qiu{
+            width: 80px;
+            height: 80px;
+            background-color: #999;
+            color: royalblue;
+            font-size: 20px;
+            font-weight: bolder;
+            text-align: center;
+            line-height: 80px;
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            border-radius: 50%;
+            opacity: 0;
+            transition: opacity 0.2s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+<h3 id="title">A</h3>
+<ul id="list"></ul>
+<ul id="az"></ul>
+<div id="qiu"></div>
+
+
+<script src="../../js/citylist.js"></script>
+<script>
+    var az = document.getElementById("az")
+    var list = document.getElementById("list")
+    var title = document.getElementById("title")
+
+    cityAll.forEach(function (item) {
+        var li = document.createElement("li")
+        var h3 = document.createElement("h3")
+        h3.innerText = item.name
+        h3.id = item.name
+        var ol = document.createElement("ol")
+        li.append(h3,ol)
+        list.appendChild(li)
+
+        item.citys.forEach(function (city) {
+            var lii = document.createElement("li")
+            lii.innerText = city
+            ol.appendChild(lii)
+        })
+
+        var azli = document.createElement("li")
+        azli.innerText = item.name
+        az.appendChild(azli)
+        azli.addEventListener("touchstart",azMousedown) // 绑定事件
+        azli.addEventListener("touchend",azTouchend)
+    })
+    var qiu = document.getElementById("qiu")
+    function azMousedown(e) { // 手指按下时 鼠标按下
+        qiu.innerText = e.target.innerText
+        qiu.style.opacity = 1
+        var el = document.getElementById(e.target.innerText)
+        el.scrollIntoView() // 会触发滚动事件
+        az.addEventListener("touchmove",azTouchmove)
+    }
+    function azTouchmove(e) {
+        var clientY = e.targetTouches[0].clientY
+        var arr = [...az.children]
+
+        var el = arr.find(function (item) {
+            return (item.offsetTop+50) < clientY && (item.offsetTop+72) > clientY
+        })
+        qiu.innerText = el.innerText
+        document.getElementById(el.innerText).scrollIntoView()
+    }
+    function azTouchend() {  // 手指松开  鼠标松开
+        az.removeEventListener("touchmove",azTouchmove)
+        setTimeout(function () {
+            qiu.style.opacity = 0
+        },200)
+    }
+
+    list.onscroll = function () {
+        var h3s = document.querySelectorAll("#list h3")
+        for (var i = 0; i < h3s.length; i++) {
+            if (list.scrollTop+40 < h3s[i].offsetTop){
+                console.log(h3s[i])
+                break
+            }
+        }
+        title.innerText = h3s[i-1].innerText
+        document.querySelector(".azactive")?.classList.remove("azactive")
+        az.children[i-1].classList.add("azactive")
+    }
+
+    // document.onscroll = function () {
+    //     console.log("滚动")
+    // }
+</script>
+</body>
+</html>

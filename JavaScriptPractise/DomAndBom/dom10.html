@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      list-style: none;
+    }
+
+    ul {
+      display: grid;
+      width: 1280px;
+      height: 540px;
+      margin: 0 auto;
+      grid-template-columns: repeat(4, 320px);
+    }
+
+    li {
+      background-image: url(https://cdn.aimeike.tv/theme/10033/thumbnail_seq.jpg?auth_key=1689857455-0-0-e76e72dec587ba3100262882721888dc);
+      width: 320px;
+      height: 180px;
+      background-size: 1280px 540px;
+      background-repeat: no-repeat;
+      font-size: 80px;
+      text-align: center;
+      line-height: 180px;
+      color: transparent;/*red*/
+      box-sizing: border-box;
+      user-select: none;
+      /*pointer-events: none;*/
+    }
+
+    .border {
+      border: 10px solid red;
+    }
+  </style>
+</head>
+<body>
+<ul id="list"></ul>
+<button onclick="checkList()">提交</button>
+<img style="display: block;margin: 0 auto" width="1000"
+     src="https://cdn.aimeike.tv/theme/10033/thumbnail_seq.jpg?auth_key=1689857455-0-0-e76e72dec587ba3100262882721888dc"/>
+<script>
+  var list = document.querySelector("#list")
+  //
+  //1280 540
+  var arr = []
+  var select = null
+  for (var i = 0; i < 12; i++) {
+    var li = document.createElement("li")
+    var col = Math.floor(i % 4) // x
+    var row = Math.floor(i / 4) // y
+    li.style.backgroundPosition = (-col * 320) + "px " + (-row * 180) + "px "
+    // console.log(row,col)
+    li.innerText = i
+
+    li.onclick = function (e) {
+      if (select){
+        var a = select
+        var b = e.target
+        var na = a.nextElementSibling
+        var nb = b.nextElementSibling
+
+        list.insertBefore(a,nb)
+        list.insertBefore(b,na)
+
+        e.target.classList.remove("border"); // 取消选中
+        select = null; // 取消选中元素
+
+      } else {
+        console.log(e) // 事件源
+        select = e.target
+        // e.target.classList.toggle("border");
+      }
+    }
+    arr.push(li)
+  }
+  function checkList() {
+    var lis = list.children
+    var pass = true
+    for (var i = 0; i < 12; i++) {
+      var index = +lis[i].innerText
+      if (i !== index) {
+        pass = false
+        break;
+      }
+    }
+    if (pass) {
+      alert("恭喜你拼图成功！")
+    } else {
+      alert("拼图失败！")
+      location.reload()
+    }
+  }
+  arr.sort(function () {
+    return Math.random() - 0.5
+  })
+  arr.forEach(function (item) {
+    list.append(item)
+  })
+</script>
+</body>
+</html>

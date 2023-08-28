@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="../js/unpkg.com_vue@3.3.4_dist_vue.global.js"></script>
+</head>
+<body>
+
+<div id="App">
+
+</div>
+<script>
+
+  const {createApp} = Vue
+  createApp({
+    data(){
+      return{
+        a:1,
+        b:2,
+        obj:{
+          name:"Christ",
+          age:23
+        }
+      }
+    }, //v-model 双向绑定
+    template:`
+<!--    <h1>{{ a }}</h1>-->
+    <h1>{{ obj }}</h1>
+    <h1>使用函数计算：{{ fn() }}</h1>
+    <h1>使用计算属性：{{ c }}</h1>
+    <button @click="fn">修改</button>
+    <button @click="c = 5">修改计算属性</button>
+`,
+    computed:{//计算属性，一经计算无法更新，仅会在其响应式依赖更新时才会重新计算
+      // c(){
+      //   console.log("计算属性,启动！")
+      //   return this.a + this.b
+      // }
+      c:{
+        get(){
+          console.log("被读取")
+          return this.a + this.b
+        },
+        set(val){
+          this.a = val
+          console.log("被修改")
+        }
+      }
+    },
+    watch:{ //监听器
+      // a(newValue,oldValue){
+      //  console.log(newValue);
+      //  console.log(oldValue);
+      // }
+      "obj.name"(newValue){
+        console.log("监听obj的name属性",newValue)
+      },
+      obj:{
+        handler(newValue,oldValue){//监听器处理函数
+          console.log(newValue);
+          console.log(oldValue);
+        },
+        // immediate:true//初始执行一次
+        deep:true//深度监听
+      }
+    },
+    methods:{
+      fn(){
+        // this.a++
+        // this.obj = 1
+        console.log("函数计算,启动！")
+        return this.a+this.b
+      }
+    }
+
+
+  }).mount("#App")
+
+</script>
+</body>
+</html>

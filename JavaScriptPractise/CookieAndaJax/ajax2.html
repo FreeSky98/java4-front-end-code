@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<ul id="list">
+  <li>
+    <h3></h3>
+    <video></video>
+  </li>
+  <li>
+    <h3></h3>
+    <video></video>
+  </li>
+</ul>
+
+<script>
+  var list = document.getElementById("list")
+  var xhr = new XMLHttpRequest();
+  xhr.open("GET","https://myapi.hml-media.net/jeecg-boot/client/cms/ad/list")
+  xhr.send()
+  xhr.onload = function () {
+    var res = JSON.parse(xhr.response)
+    res.result.records.forEach(function (item) {
+      var li = document.createElement("li")
+      var h3 = document.createElement("h3")
+      var video = document.createElement("video")
+      li.append(h3,video)
+      h3.innerText = item.title
+      video.src = item.url
+      video.controls = true
+      list.appendChild(li)
+    })
+  }
+</script>
+</body>
+</html>

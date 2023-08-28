@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<script>
+  function Person(name,age,job,address) {
+    this.name = name;
+    this.age = age;
+    this.job = job;
+    this.address = address;
+  }
+  Person.prototype.intro = function () {
+    console.log("函数执行");
+  } //共享函数（原型属性/方法）
+  //每个类都有XXX.prototype对象，这个对象的所有属性可以在所有同类型实例中共享
+
+  const p1 = new Person("Black",12,"student","California");
+  console.log(p1);
+</script>
+</body>
+</html>

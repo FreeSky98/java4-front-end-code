@@ -1,0 +1,100 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    *{
+      padding: 0;
+      margin: 0;
+      list-style: none;
+    }
+    #box{
+      width: 800px;
+      border: 1px solid red;
+      margin: 0 auto;
+      background-color: #f8f8f8;
+      display: flex;
+      flex-wrap: wrap;
+      padding-bottom: 20px;
+    }
+    #box>li{
+      width: 120px;
+      height: 140px;
+      background-color: #fff;
+      border-radius: 4px;
+      font-size: 50px;
+      text-align: center;
+      line-height: 140px;
+      margin: 20px 0 0 20px;
+      cursor: move;
+      border: 2px solid #fff;
+      user-select: none;
+      position: relative;
+    }
+    #box>li:hover{
+      border-color: #999999;
+    }
+  </style>
+</head>
+<body>
+<ul id="box"></ul>
+
+<script>
+  var box = document.getElementById("box")
+  var draggedElement = null;
+  var targetElement = null;
+
+  for (var i = 0; i < 10; i++) {
+    var li = document.createElement("li")
+    li.innerText = i
+    box.appendChild(li)
+    li.addEventListener("mousedown",liDown)
+    li.addEventListener("mouseup",liUp)
+    li.addEventListener("mouseleave",liUp)
+  }
+
+  function updateTargetElement(x, y) {
+    targetElement = null;
+    var elements = Array.from(document.querySelectorAll("#box > li:not(:hover)"));
+    elements.forEach(function (element) {
+      var rect = element.getBoundingClientRect();
+      if (x >= rect.left && x <= rect.right && y >= rect.top && y <= rect.bottom) {
+        targetElement = element;
+      }
+    });
+  }
+  function liDown(e) {
+    draggedElement = e.target;
+    var rect = draggedElement.getBoundingClientRect();
+    draggedElement.style.transition = "";
+    draggedElement.style.zIndex = "99999";
+    draggedElement.onmousemove = function (ev) {
+      var left = ev.clientX - rect.left - (ev.target.offsetWidth / 2);
+      var top = ev.clientY - rect.top - (ev.target.offsetHeight / 2);
+      ev.target.style.left = left + "px";
+      ev.target.style.top = top + "px";
+      updateTargetElement(ev.clientX, ev.clientY);
+    };
+    updateTargetElement(e.clientX, e.clientY);
+  }
+  function liUp(e) {
+    draggedElement.onmousemove = null;
+    draggedElement.style.transition = "all 0.3s";
+    draggedElement.style.left = "0px";
+    draggedElement.style.top = "0px";
+    draggedElement.style.zIndex = "auto";
+    if (targetElement) {
+      if (draggedElement.compareDocumentPosition(targetElement) === Node.DOCUMENT_POSITION_FOLLOWING) {
+        box.insertBefore(draggedElement, targetElement.nextSibling);
+      } else {
+        box.insertBefore(draggedElement, targetElement);
+      }
+    }
+    draggedElement = null;
+    targetElement = null;
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    #dragElement {
+      width: 200px;
+      height: 200px;
+      background-color: red;
+      position: absolute;
+      left: 0;
+      top: 0;
+      cursor: move;
+    }
+  </style>
+</head>
+<body>
+<div id="dragElement"></div>
+
+<script>
+  var dragElement = document.getElementById('dragElement');
+  var offset = { x: 0, y: 0 };
+
+  // 鼠标按下事件
+  dragElement.addEventListener('mousedown', function (event) {
+    offset.x = event.clientX - dragElement.offsetLeft;
+    offset.y = event.clientY - dragElement.offsetTop;
+
+    // 鼠标移动事件
+    document.addEventListener('mousemove', onMouseMove);
+
+    // 鼠标松开事件
+    document.addEventListener('mouseup', onMouseUp);
+  });
+
+  function onMouseMove(event) {
+    dragElement.style.left = (event.clientX - offset.x) + 'px';
+    dragElement.style.top = (event.clientY - offset.y) + 'px';
+  }
+
+  function onMouseUp() {
+    document.removeEventListener('mousemove', onMouseMove);
+    document.removeEventListener('mouseup', onMouseUp);
+  }
+</script>
+</body>
+</html>

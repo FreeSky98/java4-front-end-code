@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<button id="btn">click</button>
+
+<script>
+  var obj = {
+    name:"Ada",age:20,fn:function () {
+      console.log("fn函数执行")
+      console.log(this,"fn")
+    }
+  }
+  obj.fn()
+
+  var btn = document.getElementById("btn")
+  // btn.onclick = function () {
+  //   console.log(this, "btn click");
+  // }
+
+  btn.onclick = function () {
+    console.log(this, "btn");
+    setTimeout(function (){
+      console.log(this,"定时");
+    },1000);
+  }
+
+</script>
+</body>
+</html>

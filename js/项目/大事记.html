@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>大事记</title>
+    <script src="js/aaa.js"></script>
+    <link rel="stylesheet" href="./css/bootstrap.min.css"/>
+    <script src="./js/query.min.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
+    <script src="js/swiper-bundle.min.js"></script>
+    <link rel="stylesheet" href="css/swiper-bundle.min.css">
+    <script src="js/jquery.color-2.2.0.min.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <script src="js/query.min.js"></script>
+    <style>
+      .history{
+          width: 960px;
+          padding-left: 30px;
+          position: relative;
+          font-size: 30px;
+          margin: 70px auto;
+      }
+      .history h4{
+          font-size: 25px;
+      }
+      .history-year ul{
+          border-left: 3px solid #2eab23;
+      }
+      .list{
+          position: fixed;
+          top: 400px;
+          right: 10px;
+          font-size: 18px;
+          list-style: none;
+          line-height: 35px;
+      }
+      .history-year ul{
+          color: green;
+      }
+      i{
+          color: black;
+          font-family: 方正舒体s;
+      }
+      p{
+          font-size: 18px;
+          color: black;
+      }
+      img{
+          width: 530px;
+          height: 420px;
+      }
+
+    </style>
+    <link rel="stylesheet" href="css/footNav.css">
+
+
+</head>
+<body>
+<script src="js/navbar.js"></script>
+
+<div class="history">
+
+</div>
+
+<ul class="list">
+
+</ul>
+<script>
+    console.log(jjj);
+    var arr = []
+    jjj.forEach(function (item) {
+          var  title = +item.createtime.slice(0, 4)
+        if(!arr.includes(title)){
+            arr.push(title)
+        }
+    })
+
+    arr.forEach(function (item,index) {
+        arr[index] = {
+            title:item,
+            children:jjj.filter(function (it) {
+                return +it.createtime.slice(0,4) === item
+            })
+        }
+    })
+    console.log(arr);
+   // var history = document.getElementsByClassName("history")
+    arr.forEach(function (item) {
+        item.children.forEach(function (item2) {
+            var con = $(`<div class="history-year">
+            <h4>${item.title}</h4>
+            <ul>
+                <li>
+                    <i>${item2.createtime}</i>
+                    <p>${item2.abst}</p>
+
+                    <p><img src="${item2.coverimg}" alt=""></p>
+                </li>
+            </ul>
+        </div>`)   //创建div标签
+            console.log(item.title);
+            console.log(item2.coverimg);
+            $(".history").append(con)
+        })
+
+        var con2 = $(`
+        <li>${item.title}</li>
+          `)
+        con2.addClass("list-li");
+        $(".list").append(con2)
+    })
+
+
+
+</script>
+
+<script src="js/footerNav.js"></script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<ul>
+  <li>1</li>
+  <li>2</li>
+  <li>3</li>
+  <li>4</li>
+  <li>5</li>
+</ul>
+
+<script>
+  var ul = document.querySelector("ul")
+  var ulLis = ul.children //获取ul的子元素
+  var ulBody = ul.parentElement//获取ul的父元素
+  console.log(ulLis[1].nextElementSibling);//获取下标1的下一个兄弟元素
+  console.log(ulLis[1].previousElementSibling);//获取下标1的上一个兄弟元素
+
+  ul.firstElementChild//第一个元素
+  ul.lastElementChild//最后一个元素
+</script>
+</body>
+</html>

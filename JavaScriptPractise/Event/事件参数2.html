@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<style>
+  *{
+    margin: 0;
+    padding: 0;
+  }
+  img{
+    display: block;
+    width: 100%;
+    user-select: none;
+    pointer-events: none;
+  }
+  div{
+    width: 500px;
+    margin: 200px auto;
+    position: relative;
+  }
+  img+img{
+    filter: grayscale(100%);
+    position: absolute;
+    left: 0;
+    top: 0;
+    clip-path: inset(0px 0px 0px 50%); /*裁剪 上右下左*/
+    animation: img 0.6s 0.5s ease-in-out forwards;
+  }
+  #line{
+    position: absolute;
+    height: 155px;
+    width: 2px;
+    background-color: red;
+    z-index: 99;
+    cursor: ew-resize;
+    top: 0;
+    left: 50%;
+    animation: line 0.6s 0.5s ease-in-out forwards;
+  }
+  @keyframes img {
+    0% {
+      clip-path: inset(0px 0px 0px 0%);
+    }
+    100% {
+      clip-path: inset(0px 0px 0px 50%);
+    }
+  }
+  @keyframes line {
+    0%{
+      left: 0;
+    }
+    100%{
+      left: 50%;
+    }
+  }
+
+
+</style>
+<body>
+<div id="box">
+  <p id="line"></p>
+  <img src="https://ai.bdstatic.com/file/7B3F881B81034D78AFB4E5B3027B5B1B" alt="">
+  <img id="grayPic" src="https://ai.bdstatic.com/file/7B3F881B81034D78AFB4E5B3027B5B1B" alt="">
+</div>
+
+<script>
+  var box = document.querySelector("#box")//CSS选择器要加符号
+  var line = document.querySelector("#line")
+  var grayPic = document.querySelector("#grayPic")
+  box.onmousedown = function () {
+    box.onmousemove = function (e) {
+      console.log(e);
+      var rect = box.getBoundingClientRect()//盒子相对于页面的偏移量
+      var left = e.clientX - rect.left
+      line.style.left = "clamp(0px,"+left+"px,498px)"
+      grayPic.style.clipPath = "inset(0px 0px 0px "+left+"px)";
+    }
+  }
+  box.onmouseup = function () {
+    box.onmousemove = null
+  }
+  box.onmouseleave = function () {
+    box.onmousemove = null
+  }
+</script>
+</body>
+</html>

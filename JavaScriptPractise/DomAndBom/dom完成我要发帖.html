@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>我要发帖</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      list-style: none;
+    }
+
+    .box {
+      width: 600px;
+      margin: 100px auto;
+      border: 1px solid red;
+    }
+
+    li {
+      display: flex;
+      align-items: center;
+    }
+
+    li > img {
+      width: 80px;
+      height: 80px;
+      margin-right: 20px;
+    }
+
+    #mask {
+      width: 100%;
+      height: 100vh;
+      background-color: rgba(0, 0, 0, 0.4);
+      position: fixed;
+      left: 0;
+      top: 0;
+      display: none;
+    }
+
+    #form {
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 6px;
+      position: absolute;
+      width: 50%;
+      top: 100px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .form-item {
+      margin: 20px auto;
+    }
+
+    #title, #type {
+      width: 100%;
+      box-sizing: border-box;
+      height: 40px;
+      padding-left: 16px;
+    }
+
+    textarea {
+      width: 100%;
+      resize: none;
+    }
+
+    .form-footer > button {
+      padding: 10px;
+    }
+
+    .form-footer {
+      text-align: right;
+    }
+  </style>
+</head>
+<body>
+<div id="mask">
+  <div id="form">
+    <div class="form-item">
+      <input id="title" placeholder="请输入标题" maxlength="15"/>
+    </div>
+    <div class="form-item">
+      <select id="type">
+        <option>选项一</option>
+        <option>选项二</option>
+        <option>选项三</option>
+      </select>
+    </div>
+    <div class="form-item">
+            <textarea
+              placeholder="请输入"
+              rows="10"></textarea>
+    </div>
+    <div class="form-footer">
+      <button onclick="hideForm()">取消</button>
+      <button>确定</button>
+    </div>
+  </div>
+</div>
+<div class="box">
+  <button onclick="showForm()">我要发帖</button>
+  <ul>
+    <li>
+      <img src="https://api.dzzui.com/api/imgtaobao?r=" alt=""/>
+      <div>
+        <h3>如何学习前端开发</h3>
+        <p>
+          <span>板块：新课来了</span>
+          <span>发表时间：2023-7-20</span>
+        </p>
+      </div>
+    </li>
+  </ul>
+</div>
+<script>
+  var mask = document.querySelector("#mask")
+  var list = document.querySelector("#list")
+  var title = document.querySelector("#title")
+  var type = document.querySelector("#type")
+  function showForm() {
+    mask.style.display = "block"
+  }
+
+  function hideForm() {
+    mask.style.display = "none"
+    title.value = ""
+  }
+
+  function submit() {
+    var li = document.createElement("li")
+    var img = document.createElement("img")
+    img.src = "https://api.dzzui.com/api/imgtaobao?r="+ Math.random()
+
+    var div = document.createElement("div")
+    var h3 = document.createElement("h3")
+    h3.innerText = title.value
+    var p = document.createElement("p")
+    var span1 = document.createElement("span")
+    span1.innerText = "板块："+ type.value
+    var span2 = document.createElement("span")
+    span2.innerText = "发表时间："+ dataString()
+    li.append(img,div)
+    div.append(h3,p)
+    p.append(span1,span2)
+    list.appendChild(li)
+    hideForm()
+  }
+
+  function zero(n) {
+    return n > 9? n :'0' + n
+  }
+
+  function dataString() {
+    var date = new Date()
+    var y = date.getFullYear()
+    var m = date.getMonth() + 1
+    var d = date.getDay()
+    var h = date.getHours()
+    var mm = date.getMinutes()
+    var ss = date.getSeconds()
+    return y+"-"+zero(m)+"-"+zero(d)+" "+zero(h)+":"+zero(mm)+":"+zero(ss)
+  }
+</script>
+</body>
+</html>

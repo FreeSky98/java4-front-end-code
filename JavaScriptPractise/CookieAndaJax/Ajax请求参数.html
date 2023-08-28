@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+
+<script>
+  //请求参数：前端传给后端的参数
+
+  //xhr.open("GET")
+  //请求方式
+  //GET POST
+
+  //查询参数 查询风格 queryString get常用
+  //xhr.open("GET","https://www.baidu.com?username=张三&password=123456")
+
+  //地址传参 path restfull风格 get常用
+  //接口地址 /jeecg-boot-client-cms-banner/series/${series}/${10}
+  // xhr.open("GET","/jeecg-boot-client-cms-banner/series/series/1")
+
+  //requestBody传参 post
+  xhr.open("GET","https://www.baidu.com");
+  xhr.send(JSON.stringify({
+    username:"张三",
+    password:"123456"
+  }))
+  //formData requestBody传参 post 上传文件
+  var username = "张三"
+  var password = "123456"
+
+
+</script>
+</body>
+</html>

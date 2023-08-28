@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      list-style: none;
+    }
+
+    #box {
+      width: 56px;
+      height: 56px;
+      background-image: url(../../img/樊哥生气.jpg);
+      background-repeat: no-repeat;
+      border: 1px solid red;
+      background-position: center;
+      background-size: 102% 101%;
+      position: fixed;
+      left: 50%;
+      top: calc(100vh - 100px);
+    }
+
+    .bb {
+      width: 20px;
+      height: 20px;
+      background-color: red;
+      position: fixed;
+    }
+
+    .dd {
+      position: fixed;
+    }
+  </style>
+</head>
+<body>
+<div id="box"></div>
+
+<script>
+  var box = document.getElementById("box")
+  var boxRect = box.getBoundingClientRect()
+  console.log(boxRect)
+  var boxLeft = boxRect.left
+  var boxTop = boxRect.top
+  var pos = "top"  // bottom left right
+  var posArray = ['top', 'left', 'top', 'right', 'top', 'bottom', 'left']
+  document.onkeyup = function (e) {
+    console.log(e.key)
+    switch (e.key) {
+      case "w":
+        pos = "top"
+        boxTop = Math.max(boxTop -= 20, 0)
+        box.style.top = boxTop + "px"
+        box.style.transform = "rotate(0deg)"
+        break;
+      case "a":
+        pos = "left"
+        boxLeft = Math.max(boxLeft -= 20, 0)
+        box.style.left = boxLeft + "px"
+        box.style.transform = "rotate(-90deg)"
+        break;
+      case "s":
+        pos = "bottom"
+        boxTop = Math.min(innerHeight - 56, boxTop += 20)
+        box.style.top = boxTop + "px"
+        box.style.transform = "rotate(180deg)"
+        break;
+      case "d":
+        pos = "right"
+        boxLeft += 20
+        box.style.left = boxLeft + "px"
+        box.style.transform = "rotate(90deg)"
+        break;
+      default:
+        // 发射
+        var bb = document.createElement("div")
+        bb.classList.add("bb")
+        document.body.appendChild(bb)
+        boxRect = {
+          top: box.getBoundingClientRect().top + 20,
+          right: box.getBoundingClientRect().right + 20,
+          bottom: box.getBoundingClientRect().bottom + 20,
+          left: box.getBoundingClientRect().left + 20
+        }
+        console.log(boxRect, "修改前")
+        boxRect.right = innerWidth - boxRect.right
+        boxRect.bottom = innerHeight - boxRect.bottom
+        console.log(boxRect, "修改后")
+        bb.style[pos] = boxRect[pos] + "px"
+
+        var rpos = posArray[posArray.indexOf(pos) + 1]
+
+        bb.style[rpos] = boxRect[rpos] + "px"
+        bb.style[pos] = boxRect[pos]+"px"
+        serPosition(bb,pos,boxRect[pos])
+    }
+  }
+
+  function serPosition(el,pos,num,s=50) {
+    console.log(el, pos);
+    console.log(num);
+    var tid = setInterval(function () {
+      if (num < 0) {
+        clearInterval(tid)
+        el.parentElement.removeChild(el)
+      } //子弹盒子在飞出屏幕外时清理定时任务和盒子
+      el.style[pos] = (num -= 20) + "px"
+    },s)
+  }
+
+  function fn() {
+    for (var i = 0; i < 5; i++) {
+      var dd = document.createElement("div")
+      var w = Math.max(Math.floor(Math.random() * 80))
+      var h = Math.max(Math.floor(Math.random() * 80))
+
+      var r = Math.floor(Math.random() * 256)
+      var g = Math.floor(Math.random() * 256)
+      var b = Math.floor(Math.random() * 256)
+
+      var left = Math.floor(Math.random() * innerWidth)
+
+      dd.style.width = w + "px"
+      dd.style.height = h + "px"
+      dd.style.backgroundColor = "rgb("+r+","+g+","+b+")"
+      document.body.appendChild(dd)
+      serPosition(dd,"bottom",innerWidth - h,Math.random()*1000)
+    }
+  }
+  fn()
+
+</script>
+</body>
+</html>

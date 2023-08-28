@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<style>
+  #myCanvas {
+    display: block;
+    margin: 100px auto;
+    border: 1px solid skyblue;
+  }
+</style>
+<body>
+<canvas id="myCanvas" width="600" height="400"></canvas>
+<div style="text-align: center">
+  <button onclick="fa()">确认</button>
+  <button>重签</button>
+</div>
+
+
+<script>
+  var myCanvas = document.getElementById("myCanvas")
+  var ctx = myCanvas.getContext("2d")
+
+  ctx.lineWidth = 5
+  ctx.lineJoin = "round"
+  ctx.lineCap = "round"
+  ctx.fillStyle = "#ffffff"
+  ctx.fillRect(0,0,myCanvas.width,myCanvas.height)
+
+  myCanvas.onmousedown = function (e) {
+    var offsetTop = myCanvas.offsetTop
+    var offsetLeft = myCanvas.offsetLeft
+    ctx.beginPath()
+    ctx.moveTo(e.clientX-offsetLeft,e.clientY-offsetTop)
+    myCanvas.onmousemove = function (ev) {
+      ctx.lineTo(ev.clientX-offsetLeft,ev.clientY-offsetTop)
+      ctx.stroke()
+    }
+  }
+  myCanvas.onmouseup = function () {
+    myCanvas.onmousemove = null
+  }
+
+  myCanvas.onmouseleave = function () {
+    myCanvas.onmousemove = null
+    ctx.closePath()
+  }
+
+  function fa() {
+    myCanvas.toBlob(function (blob) {
+      var url = URL.createObjectURL(blob)
+      var link = document.createElement("a")
+
+      link.href = url
+      link.download = Math.random().toString().replace("0.","img")
+      link.click()
+      URL.revokeObjectURL(url)
+    })
+  }
+</script>
+</body>
+</html>

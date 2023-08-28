@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>dom练习</title>
+</head>
+<style>
+  *{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  #list{
+    display: grid;
+    width: 300px;
+    height: 300px;
+    margin: 0 auto;
+    grid-template-columns: repeat(3,1fr);/*列*/
+    grid-template-rows: repeat(3,1fr);/*行*/
+    align-items: center;
+  }
+  list{
+    text-align: center;
+    font-size: 30px;
+  }
+  .active{
+    border: 10px solid red;
+  }
+</style>
+<body>
+<div>
+  <ul id="list">
+    <li class="a">1</li>
+    <li class="a">2</li>
+    <li class="a">3</li>
+    <li class="a">4</li>
+    <li><button onclick="fn()">抽奖</button></li>
+    <li class="a">6</li>
+    <li class="a">7</li>
+    <li class="a">8</li>
+    <li class="a">9</li>
+  </ul>
+</div>
+<script>
+  var lis = document.getElementsByClassName("a")
+
+  function mission() {
+    console.log("定时任务")
+    for (let i = 0; i < lis.length; i++) {
+      lis[i].classList.remove("active")
+    }
+    var index = Math.floor(Math.random()*lis.length)
+    lis[index].classList.add("active")
+  }
+  function fn() {
+    var tid = setInterval(mission,100)
+    function clear() {
+      clearInterval(tid)
+    }
+    setTimeout(clear,2000)
+  }
+</script>
+</body>
+</html>

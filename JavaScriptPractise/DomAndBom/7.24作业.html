@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+  }
+    #videoContainer {
+      position: relative;
+    }
+
+    #timeline {
+      width: 50px;
+      height: 100%;
+      background-color: #ccc;
+    }
+
+    #playHead {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 5px;
+      height: 100%;
+      background-color: red;
+      cursor: ew-resize;
+    }
+</style>
+<body>
+<div id="videoContainer">
+  <video id="myVideo" controls>
+    <source src="../../img/珺珺喜欢喝甜水水.mp4">
+  </video>
+  <div id="timeline">
+    <div id="playHead"></div>
+  </div>
+</div>
+
+<script>
+  var video = document.getElementById('myVideo');
+  var timeline = document.getElementById('timeline');
+  var playHead = document.getElementById('playHead');
+  var isSeeking = false;
+
+  // 调整时间线宽度以适应视频时长
+  video.addEventListener('loadedmetadata', function() {
+    timeline.style.width = video.offsetWidth + 'px';
+  });
+
+  video.addEventListener('mouseleave',function () {
+    line.style.left = "-2px"
+  });
+
+  // 更新播放头位置和视频进度
+  video.addEventListener('timeupdate', function() {
+    var progress = video.currentTime / video.duration;
+    var position = timeline.offsetWidth * progress;
+    playHead.style.left = position + 'px';
+  });
+
+  // 开始拖动时将isSeeking标记为true
+  playHead.addEventListener('mousedown', function(e) {
+    isSeeking = true;
+  });
+
+  // 鼠标移动时，如果isSeeking为true，则更新播放头位置和视频播放时间
+  timeline.addEventListener('mousemove', function(e) {
+    if (isSeeking) {
+      var timelineRect = timeline.getBoundingClientRect();
+      var position = e.clientX - timelineRect.left;
+      var progress = position / timeline.offsetWidth;
+      video.currentTime = video.duration * progress;
+      playHead.style.left = position + 'px';
+    }
+  });
+
+  // 停止拖动时将isSeeking标记为false
+  window.addEventListener('mouseup', function(e) {
+    if (isSeeking) {
+      isSeeking = false;
+    }
+  });
+</script>
+</body>
+</html>

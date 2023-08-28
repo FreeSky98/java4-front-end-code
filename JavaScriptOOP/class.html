@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<script>
+
+  class Person {
+    constructor(name,age) {
+      this.name = name;
+      this.age = age;
+    }//构造器
+    print(){
+      console.log(this.name+"正在哭泣，今年都"+this.age+"岁了，怎么还在哭啊！")
+    }
+    static fn(){
+      console.log("静态方法")
+    }
+  }
+  Person.fn();
+  const T_T = new Person("小哭包",6);
+  console.log(T_T);
+  T_T.print();
+
+  class Student extends Person {
+    constructor(name,age,edu) {
+      super(name,age);
+      this.edu = edu;
+    }
+    test(){
+      console.log("test")
+    }
+    print(){
+      console.log(this.name+"正在发呆，今年都"+this.age+"岁了，是个"+ this.edu +",怎么还在发呆啊！")
+    }
+  }
+
+  const OvO = new Student("小呆比",10,"小学生");
+  console.log(OvO);
+  OvO.print();
+  OvO.test();
+
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+*{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+body{
+    padding-top: 70px;
+}
+
+.flex{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+.justify-between{
+    justify-content: space-between;
+}
+.justify-evenly{
+    justify-content:space-evenly;
+}
+
+.justify-start{
+    justify-content:flex-start;
+}
+
+.justify-end{
+    justify-content:flex-end;
+}

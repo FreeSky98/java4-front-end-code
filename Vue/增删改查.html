@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/unpkg.com_vue@3.3.4_dist_vue.global.js"></script>
+    <style>
+        li{
+            display: flex;
+            height: 50px;
+            align-items: center;
+            border: 1px solid red;
+            margin: 20px;
+        }
+    </style>
+  <script src="../js/unpkg.com_vue@3.3.4_dist_vue.global.js"></script>
+</head>
+<body>
+<div id="App">
+
+</div>
+<script>
+
+    const {createApp} = Vue
+    createApp({
+        data() {
+            return {
+                arr:[{
+                    title:"学习css",
+                    status:false,
+                },{
+                    title:"学习js",
+                    status:false,
+                }],
+
+               value:"",
+            }
+        }, //v-model 双向绑定
+        template: `
+          <div style="width: 400px;margin-left: 60px">
+          <input placeholder="请输入待办" type="text" v-model="value">
+          <button @click = "update">添加</button>
+          </div>
+          <ul>
+          <li v-for="(item,index) in arr" v-show="!item.status">
+            <input type="checkbox" v-model="item.status">
+            {{item.title}}
+            <button @click="up(index)">上移</button>
+            <button @click="down(index)">下移</button>
+            <button @click="deleteData(index)">删除</button>
+
+          </li>
+          </ul>
+          <h1>
+           已完成
+          </h1>
+          <ul>
+          <li v-for="item in screen(true)">{{item.title}}</li>
+          </ul>
+
+        `,
+        methods: {
+           update() {
+              if (this.value){
+                  const data = {
+                      title:this.value,
+                      status:false,
+                  }
+                  this.arr.unshift(data)
+                  this.value = ""
+              }
+              else {
+                  alert("请输入必填项")
+              }
+           },
+            up(index){
+               if(index !== 0 ){
+                 let data = {
+                     title:"",
+                     status:false,
+                 }
+
+                 data = this.arr[index]
+                   this.arr[index] =   this.arr[index-1]
+                   this.arr[index-1] = data
+
+               }else {
+                   alert("已经到头了哦")
+               }
+            },
+
+            down(index){
+                if(index !== this.arr.length- 1 ){
+                    [this.arr[index], this.arr[index+1]] = [this.arr[index+1], this.arr[index]];
+                }else {
+                    alert("已经到低了哦")
+                }
+            },
+
+            deleteData(index){
+               this.arr.splice(index,1)
+            },
+
+
+            screen(status){
+               return this.arr.filter(item => item.status === status)
+            }
+
+
+        }
+
+
+    }).mount("#App")
+</script>
+</body>
+</html>
